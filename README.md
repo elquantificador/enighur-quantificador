@@ -90,3 +90,17 @@ El proyecto escribe resultados en `output/`, por ejemplo:
 - Ejecuta los scripts desde la raíz del proyecto.
 - `scripts/01_ingresos_hogares.R` desactiva el dispositivo gráfico por defecto con `pdf(NULL)` para evitar generar `Rplots.pdf` durante una corrida normal.
 - Si falta una base de datos o una figura requerida, los scripts y el reporte muestran errores explícitos con las rutas revisadas.
+
+
+## Licencias y cómo citar
+
+- **Código:** [MIT](LICENSE).
+- **Texto, figuras y tablas:** [CC BY-NC 4.0](LICENSE-content).
+- **Datos de terceros:** conservan los términos de su fuente
+  ([aviso](DATA-NOTICE.md)).
+- **Nombre y logotipos:** todos los derechos reservados.
+
+Las cifras y resultados pueden citarse libremente. Menciona a los autores y a
+El Quantificador (LIDE) y enlaza la publicación original. Los usos comerciales
+de gráficos, tablas o texto requieren autorización previa:
+elquantificador@laboratoriolide.org. Ver también `CITATION.cff`.
