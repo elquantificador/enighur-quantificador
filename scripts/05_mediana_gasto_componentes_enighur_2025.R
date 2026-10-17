@@ -902,7 +902,6 @@ notes_table <- data.frame(
   stringsAsFactors = FALSE
 )
 
-output_path <- file.path("output", "tables", "enighur_2025_mediana_gasto_componentes.xlsx")
 output_path <- file.path("output", "tables", "enighur_ingresos_y_gastos_resumen.xlsx")
 dir.create(dirname(output_path), recursive = TRUE, showWarnings = FALSE)
 

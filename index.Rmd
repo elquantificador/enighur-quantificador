@@ -21,6 +21,7 @@ images:
 bibliography: references.bib
 csl: apa_num.csl
 ---
+<!-- Este index.Rmd es el front matter de otro artículo (embarazo infantil). El artículo de este repositorio está en final_version/index.Rmd. -->
 
 Edición Septiembre-Diciembre 2024
 
