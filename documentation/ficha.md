@@ -6,7 +6,7 @@ repositorios.
 
 ## Identificación
 
-- **Título:** ENIGHUR 2024-2025: ingresos y gastos de los hogares en Ecuador
+- **Título:** Ingresos y gastos de los ecuatorianos, doce años después
 - **Descripción del repositorio:** Repositorio para el articulo de El Quantificador: Ingresos y gastos de los ecuatorianos, doce años después
 - **Autoría:** Daniel Sánchez Pazmiño
 - **Fecha de publicación:** 2026-06-05
@@ -43,8 +43,8 @@ de ingreso, provincia y región.
 | Fuente | Institución | Periodo | Acceso | Script |
 |---|---|---|---|---|
 | ENIGHUR 2024-2025: bases de trabajo (`Bases_trabajo.RData`), bases primarias (`Bases_primarias.RData`) y tabulados (`Tabulados_ENIGHUR_2024-2025.xlsx`) | INEC; https://www.ecuadorencifras.gob.ec/encuesta-nacional-de-ingresos-y-gastos-de-los-hogares-urbanos-y-rurales/ | 2024-12 a 2025-11 | manual | `scripts/01_ingresos_hogares.R`, `02`, `04`, `05`, `06` |
-| ENIGHUR 2011-2012: `ENIGHUR11_INGRESOS_H.sav`, `ENIGHUR11_GASTOS_HMO.sav` y `TABULADOS ENIGHUR 2011-2012.xlsx` | INEC; [COMPLETAR: no se encontró el enlace oficial de esta edición en el repositorio ni en el artículo] | 2011-2012 | manual | `scripts/01_ingresos_hogares.R`, `scripts/05_mediana_gasto_componentes_enighur_2025.R` |
-| ENEMDU 2025 anual, personas (`BDDenemdu_personas_2025_anual.sav`) | INEC; [COMPLETAR: no se encontró el enlace oficial en el repositorio ni en el artículo] | 2025 | manual | `scripts/03_ingresos_hogares_enemdu_2025.R`, `scripts/04_resumen_ingresos_hogares_2025.R` |
+| ENIGHUR 2011-2012: `ENIGHUR11_INGRESOS_H.sav`, `ENIGHUR11_GASTOS_HMO.sav` y `TABULADOS ENIGHUR 2011-2012.xlsx` | INEC; [catálogo ANDA, ENIGHUR 2011-2012](https://anda.inec.gob.ec/anda5/index.php/catalog/291) | 2011-2012 | manual | `scripts/01_ingresos_hogares.R`, `scripts/05_mediana_gasto_componentes_enighur_2025.R` |
+| ENEMDU 2025 anual, personas (`BDDenemdu_personas_2025_anual.sav`) | INEC; [ENEMDU Anual](https://www.ecuadorencifras.gob.ec/enemdu-anual/) (archivo `1_BDD_ENEMDU_2025_SPSS.zip`: https://www.ecuadorencifras.gob.ec/documentos/web-inec/EMPLEO/2025/anual/1_BDD_ENEMDU_2025_SPSS.zip) | 2025 | manual | `scripts/03_ingresos_hogares_enemdu_2025.R`, `scripts/04_resumen_ingresos_hogares_2025.R` |
 
 Ningún script descarga datos. Los archivos pesados no están en el
 repositorio; hay que colocarlos así, desde la raíz del proyecto:
