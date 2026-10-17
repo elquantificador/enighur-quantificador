@@ -20,7 +20,8 @@ Publicado el 2026-06-05; el sitio registra una actualización el 2026-10-01. El
 título publicado es "Ingresos y gastos de los ecuatorianos, doce años después".
 El texto del artículo está en `final_version/index.Rmd`; el `index.Rmd` de la
 raíz es el front matter de otro artículo (embarazo infantil) y no corresponde a
-este.
+este; lleva un comentario HTML que lo aclara y ningún script lo usa. El README
+anterior menciona `article/index.Rmd`, carpeta que no existe.
 
 ## Pregunta y alcance
 
@@ -103,14 +104,14 @@ y de los scripts son:
    `Rscript final_version/grafico1/scripts/01_prepare_data.R` y luego
    `Rscript final_version/grafico1/scripts/02_render_grafico1.R`.
 6. El texto publicado está en `final_version/index.Rmd`, que lee
-   `final_version/images/`. La versión `report/report.qmd` se renderiza con
+   `final_version/images/` (no uses el `index.Rmd` de la raíz, que es de otro
+   artículo). La versión `report/report.qmd` se renderiza con
    `quarto render report/report.qmd`.
 
-Observaciones: el README anterior menciona
+Observación: el README anterior menciona
 `output/tables/resumen_ingresos_hogares_2025.xlsx` y `scripts/04` lo escribe,
-pero ese archivo no está versionado. Además,
-`scripts/05_mediana_gasto_componentes_enighur_2025.R` asigna `output_path` dos
-veces y solo conserva `enighur_ingresos_y_gastos_resumen.xlsx`.
+pero ese archivo no está versionado. `scripts/05` escribe solo
+`output/tables/enighur_ingresos_y_gastos_resumen.xlsx`.
 
 ## README anterior
 

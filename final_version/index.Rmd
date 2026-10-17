@@ -3,7 +3,7 @@ title: "Ingresos y gastos de los ecuatorianos, 12 años después"
 date: '2026-06-01'
 slug: 2026-06-01-enighur-ingresos-gastos-ecuador
 authors:
-  - 'daniel-sanchez-pazmino'
+  - 'daniel-sanchez'
 categories:
   - Economía
   - Estadística
