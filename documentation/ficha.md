@@ -8,49 +8,109 @@ repositorios.
 
 - **Título:** ENIGHUR 2024-2025: ingresos y gastos de los hogares en Ecuador
 - **Descripción del repositorio:** Repositorio para el articulo de El Quantificador: Ingresos y gastos de los ecuatorianos, doce años después
-- **Autoría:** [COMPLETAR: nombres, igual que en el sitio]
-- **Fecha de publicación:** [COMPLETAR: AAAA-MM-DD]
-- **Artículo publicado:** [COMPLETAR: enlace a elquantificador.org]
-- **Categoría:** [COMPLETAR: Economía, Política, Salud, Educación o Valores y
-  comportamiento]
-- **Edición:** [COMPLETAR: por ejemplo, Julio-Diciembre 2026]
+- **Autoría:** Daniel Sánchez Pazmiño
+- **Fecha de publicación:** 2026-06-05
+- **Artículo publicado:** https://elquantificador.org/post/economia/2026-06-01-enighur-ingresos-gastos-ecuador/
+- **Categoría:** Economía
+- **Edición:** Enero-Junio 2026
 
 ## Estado
 
-[COMPLETAR: en preparación, en revisión editorial o publicado. Anota qué falta
-para cerrar el artículo.]
+Publicado el 2026-06-05; el sitio registra una actualización el 2026-10-01. El
+título publicado es "Ingresos y gastos de los ecuatorianos, doce años después".
+El texto del artículo está en `final_version/index.Rmd`; el `index.Rmd` de la
+raíz es el front matter de otro artículo (embarazo infantil) y no corresponde a
+este.
 
 ## Pregunta y alcance
 
-[COMPLETAR: dos o tres oraciones con la pregunta, el periodo, la cobertura
-geográfica y la unidad de análisis.]
+El artículo pregunta cuánto ganan los hogares de Ecuador y en qué gastan su
+dinero. Usa la ENIGHUR 2024-2025 del INEC (recolección de diciembre de 2024 a
+noviembre de 2025), con cobertura nacional, y compara puntualmente con la
+ENIGHUR 2011-2012. La unidad de análisis es el hogar, desagregado por quintil
+de ingreso, provincia y región.
 
 ## Requisitos
 
-- R [COMPLETAR: versión, por ejemplo 4.5.x].
-- Paquetes de R: [COMPLETAR: lista en orden alfabético].
+- R: no documentada en el repositorio.
+- Paquetes de R: cowplot, dplyr, ggplot2, haven, htmltools, htmlwidgets,
+  janitor, knitr, openxlsx, plotly, readr, readxl, scales, tidyverse. Los
+  scripts de `scripts/` los verifican con `ensure_packages()` y no los
+  instalan. Para renderizar `report/report.qmd` hace falta además Quarto.
 
 ## Fuentes de datos
 
 | Fuente | Institución | Periodo | Acceso | Script |
 |---|---|---|---|---|
-| [COMPLETAR] | [COMPLETAR] | [COMPLETAR] | [COMPLETAR: descarga automática o manual] | `code/cleaning/00_download_fuente.R` |
+| ENIGHUR 2024-2025: bases de trabajo (`Bases_trabajo.RData`), bases primarias (`Bases_primarias.RData`) y tabulados (`Tabulados_ENIGHUR_2024-2025.xlsx`) | INEC; https://www.ecuadorencifras.gob.ec/encuesta-nacional-de-ingresos-y-gastos-de-los-hogares-urbanos-y-rurales/ | 2024-12 a 2025-11 | manual | `scripts/01_ingresos_hogares.R`, `02`, `04`, `05`, `06` |
+| ENIGHUR 2011-2012: `ENIGHUR11_INGRESOS_H.sav`, `ENIGHUR11_GASTOS_HMO.sav` y `TABULADOS ENIGHUR 2011-2012.xlsx` | INEC; [COMPLETAR: no se encontró el enlace oficial de esta edición en el repositorio ni en el artículo] | 2011-2012 | manual | `scripts/01_ingresos_hogares.R`, `scripts/05_mediana_gasto_componentes_enighur_2025.R` |
+| ENEMDU 2025 anual, personas (`BDDenemdu_personas_2025_anual.sav`) | INEC; [COMPLETAR: no se encontró el enlace oficial en el repositorio ni en el artículo] | 2025 | manual | `scripts/03_ingresos_hogares_enemdu_2025.R`, `scripts/04_resumen_ingresos_hogares_2025.R` |
 
-Si alguna fuente no permite descarga automática, explica aquí cómo obtenerla y
-dónde colocarla en `data/raw/`.
+Ningún script descarga datos. Los archivos pesados no están en el
+repositorio; hay que colocarlos así, desde la raíz del proyecto:
+
+- `data/enighur/2025/Enighur_Bases_de_datos_R/Bases de trabajo/Bases_trabajo_R/Bases_trabajo.RData`
+- `data/enighur/2025/Bases_primarias/Bases_primarias.RData`
+- `data/enighur/2025/Tabulados_ENIGHUR_2024-2025.xlsx`
+- `data/enighur/2012/required/ENIGHUR11_INGRESOS_H.sav` y
+  `ENIGHUR11_GASTOS_HMO.sav` (los scripts aceptan también las rutas originales
+  largas de 2012)
+- `data/enighur/2012/TABULADOS ENIGHUR 2011-2012.xlsx`
+- `data/enemdu/1_BDD_ENEMDU_2025_SPSS/BDDenemdu_personas_2025_anual.sav`
+
+Sí está versionado `data/intermediate/mapeo_categorias_gasto.csv`, el mapeo
+propio de las categorías de gasto del INEC (ENIGHUR) a las categorías del
+artículo.
 
 ## Salidas
 
-- `outputs/tables/[COMPLETAR].csv`: [COMPLETAR: qué contiene].
-- `outputs/graphs/[COMPLETAR].png`: [COMPLETAR: qué muestra].
-- `article/images/graficoN.png`: copias numeradas según el orden del texto.
+- `final_version/images/grafico1` a `grafico6` (`.png` y `.svg`): los seis
+  gráficos del artículo, en el orden del texto. `grafico1` es idéntico al
+  archivo `output/figures/sankey_ingresos_gastos_2025.png` y `grafico5` a
+  `output/figures/gasto_total_mediano_provincia_2025.png`; los demás difieren
+  de los archivos de `output/figures/`.
+- `final_version/grafico1/output/grafico1.png` y `.svg`: gráfico 1 reproducible
+  de forma independiente (descomposición del ingreso monetario mensual del
+  hogar promedio), junto con `data/raw/*.rds` y
+  `data/processed/grafico1_processed.rds`.
+- `output/figures/*.png` y `*.svg`: figuras de trabajo (distribución del
+  ingreso, gasto por quintil, gasolina, gasto mediano por provincia,
+  alimentos por región, Sankey) y `sankey_ingresos_gastos_interactivo.html`.
+- `output/tables/enemdu_2025_ingreso_hogar_summary.xlsx`: resumen del ingreso
+  del hogar desde ENEMDU 2025.
+- `output/tables/enighur_ingresos_y_gastos_resumen.xlsx`: resumen de ingresos
+  y gastos de ENIGHUR.
+- `output/tables/productos_alimentos_mas_presentes_region_2025.csv`: productos
+  de alimentos más presentes en las compras de los hogares, por región.
+- `report/report.qmd`: versión Quarto anterior del artículo, que consume las
+  figuras de `output/figures/`.
 
 ## Cómo replicar en este repositorio
 
-Este repositorio conserva sus instrucciones originales en la sección
-"README anterior". Si todavía no tiene `MASTER.R`, sigue esas instrucciones.
-Cuando se migre a la estructura estándar, reemplaza esta sección por los pasos
-de `MASTER.R`.
+El repositorio no tiene `MASTER.R`. Los pasos que se toman del README anterior
+y de los scripts son:
+
+1. Coloca los archivos de datos en las rutas de la sección Fuentes de datos y
+   abre `enighur-quantificador.Rproj` (los scripts se ejecutan desde la raíz).
+2. Instala los paquetes de la sección Requisitos.
+3. Ejecuta `Rscript scripts/check.R`, la verificación rápida de código y rutas.
+4. Ejecuta los scripts en orden numérico según lo que necesites:
+   `01_ingresos_hogares.R` (figuras de ingreso, gasto, gasolina, provincias y
+   regiones), `02_sankey_ingresos_gastos.R` (Sankey), `03` y `04` (tablas de
+   ingreso con ENEMDU 2025 y ENIGHUR 2025), `05` (medianas de gasto por
+   componente) y `06_productos_alimentos_region.R` (alimentos por región).
+5. Para el gráfico 1 por separado, ejecuta
+   `Rscript final_version/grafico1/scripts/01_prepare_data.R` y luego
+   `Rscript final_version/grafico1/scripts/02_render_grafico1.R`.
+6. El texto publicado está en `final_version/index.Rmd`, que lee
+   `final_version/images/`. La versión `report/report.qmd` se renderiza con
+   `quarto render report/report.qmd`.
+
+Observaciones: el README anterior menciona
+`output/tables/resumen_ingresos_hogares_2025.xlsx` y `scripts/04` lo escribe,
+pero ese archivo no está versionado. Además,
+`scripts/05_mediana_gasto_componentes_enighur_2025.R` asigna `output_path` dos
+veces y solo conserva `enighur_ingresos_y_gastos_resumen.xlsx`.
 
 ## README anterior
 
