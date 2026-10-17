@@ -1,0 +1,7 @@
+source_name,institution,period,official_url,downloaded_file,script
+ENIGHUR 2024-2025 (bases de trabajo),INEC,2024-12 a 2025-11,https://www.ecuadorencifras.gob.ec/encuesta-nacional-de-ingresos-y-gastos-de-los-hogares-urbanos-y-rurales/,data/enighur/2025/Enighur_Bases_de_datos_R/Bases de trabajo/Bases_trabajo_R/Bases_trabajo.RData,manual
+ENIGHUR 2024-2025 (bases primarias),INEC,2024-12 a 2025-11,https://www.ecuadorencifras.gob.ec/encuesta-nacional-de-ingresos-y-gastos-de-los-hogares-urbanos-y-rurales/,data/enighur/2025/Bases_primarias/Bases_primarias.RData,manual
+ENIGHUR 2024-2025 (tabulados),INEC,2024-12 a 2025-11,https://www.ecuadorencifras.gob.ec/encuesta-nacional-de-ingresos-y-gastos-de-los-hogares-urbanos-y-rurales/,data/enighur/2025/Tabulados_ENIGHUR_2024-2025.xlsx,manual
+ENIGHUR 2011-2012 (ingresos y gastos del hogar),INEC,2011-2012,https://anda.inec.gob.ec/anda5/index.php/catalog/291,data/enighur/2012/required/ENIGHUR11_INGRESOS_H.sav; data/enighur/2012/required/ENIGHUR11_GASTOS_HMO.sav,manual
+ENIGHUR 2011-2012 (tabulados),INEC,2011-2012,https://anda.inec.gob.ec/anda5/index.php/catalog/291,data/enighur/2012/TABULADOS ENIGHUR 2011-2012.xlsx,manual
+ENEMDU 2025 anual (personas),INEC,2025,https://www.ecuadorencifras.gob.ec/documentos/web-inec/EMPLEO/2025/anual/1_BDD_ENEMDU_2025_SPSS.zip,data/enemdu/1_BDD_ENEMDU_2025_SPSS/BDDenemdu_personas_2025_anual.sav,manual
