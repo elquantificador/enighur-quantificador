@@ -1,96 +1,77 @@
-# ENIGHUR 2024-2025: ingresos y gastos de los hogares en Ecuador
+# Repositorio de replicación de El Quantificador
 
-Análisis en R de la ENIGHUR 2024-2025, con comparaciones puntuales frente a la ENIGHUR 2011-2012 y una salida editorial en Quarto para *El Quantificador*.
+Este repositorio reúne los datos, el código y el artículo de una publicación
+de [El Quantificador](https://elquantificador.org/), el blog de análisis
+cuantitativo del Laboratorio de Investigación para el Desarrollo del Ecuador
+(LIDE). Todos los repositorios de artículos de El Quantificador tienen este
+mismo README y esta misma estructura de carpetas.
 
-## Qué hace este repo
+Los datos propios de cada artículo (título, autoría, fuentes, estado y
+salidas) están en [`documentation/ficha.md`](documentation/ficha.md).
 
-Este proyecto construye gráficos, tablas y un artículo corto sobre ingresos y gastos de los hogares ecuatorianos. El flujo principal:
+## Cómo replicar
 
-1. Carga bases locales de ENIGHUR 2025 en `.RData`.
-2. Reconstruye y compara métricas clave de 2012 y 2025.
-3. Exporta figuras y tablas a `output/`.
-4. Inserta esos resultados en `report/report.qmd`.
+1. Clona el repositorio y abre el archivo `.Rproj` de la raíz con RStudio, o
+   abre una terminal en la raíz del repositorio.
+2. Instala los paquetes de R que figuran en `documentation/ficha.md`.
+3. Corre desde la raíz:
+
+   ```text
+   Rscript MASTER.R
+   ```
+
+`MASTER.R` descarga los insumos a `data/raw/`, los limpia, calcula los
+resultados y escribe tablas y figuras en `outputs/`. También copia las
+figuras numeradas a `article/images/`.
+
+Los repositorios anteriores a 2026 que todavía no tienen `MASTER.R` explican
+cómo replicar en `documentation/ficha.md`.
+
+Para ver el artículo, abre `article/index.Rmd` en RStudio y usa Knit. La
+versión publicada se genera desde el repositorio del sitio con `blogdown`.
 
 ## Requisitos
 
-- R con los paquetes usados por cada script ya instalados.
-- Quarto para renderizar el reporte.
-- Archivos locales de datos bajo `data/`.
-
-Los scripts no instalan dependencias automáticamente. Si falta un paquete, el proyecto falla rápido y debes instalarlo manualmente.
+- R y los paquetes listados en `documentation/ficha.md`.
+- Los scripts no instalan paquetes. Si falta alguno, R se detiene en
+  `library()` y te dice cuál es.
+- Para revisar el estilo del código: `lintr` y `styler`
+  (`Rscript code/setup/style_project.R`).
 
 ## Estructura
 
-- `scripts/01_ingresos_hogares.R`: script principal para generar varias figuras de ingresos, gasto total, gasolina, provincias y regiones.
-- `scripts/02_sankey_ingresos_gastos.R`: genera el Sankey interactivo y sus salidas estáticas.
-- `scripts/03_ingresos_hogares_enemdu_2025.R`: resume ingresos del hogar desde ENEMDU 2025.
-- `scripts/04_resumen_ingresos_hogares_2025.R`: arma tablas resumen de ingresos de hogares ENIGHUR 2025.
-- `scripts/05_mediana_gasto_componentes_enighur_2025.R`: calcula medianas y resúmenes de gasto por componentes.
-- `scripts/06_productos_alimentos_region.R`: produce gráfico y tabla de productos alimenticios por región.
-- `scripts/utils.R`: temas y helpers compartidos para exportar figuras.
-- `scripts/packages.R`: validación y carga de paquetes.
-- `scripts/check.R`: smoke check barato para validar código y rutas críticas sin correr todo el análisis.
-- `report/report.qmd`: artículo Quarto que consume figuras desde `output/figures/`.
-- `output/figures/`: figuras generadas.
-- `output/tables/`: tablas generadas.
-
-## Datos esperados
-
-El repo asume insumos locales grandes que no conviene versionar completos.
-
-Rutas importantes que el proyecto busca:
-
-- `data/enighur/2025/Enighur_Bases_de_datos_R/Bases de trabajo/Bases_trabajo_R/Bases_trabajo.RData`
-- `data/enighur/2012/required/ENIGHUR11_INGRESOS_H.sav`
-- `data/enighur/2012/required/ENIGHUR11_GASTOS_HMO.sav`
-
-También acepta las rutas originales largas de 2012 si esos archivos no están copiados en `required/`.
-
-## Flujo recomendado
-
-Primero corre el smoke check:
-
-```powershell
-Rscript scripts/check.R
+```text
+MASTER.R               Punto de entrada: ejecuta el pipeline en orden
+article/               Artículo listo para copiar al sitio (index.Rmd)
+code/cleaning/         Descarga y limpieza de cada fuente
+code/analysis/         Cálculos, tablas y figuras
+code/functions/        Funciones compartidas por más de un script
+code/setup/            Herramientas fuera del pipeline (estilo y lint)
+data/raw/              Descargas originales, sin modificar (no se versionan)
+data/intermediate/     Bases limpias por fuente (no se versionan)
+data/final/            Bases listas para el análisis (no se versionan)
+documentation/         Ficha del artículo, fuentes, diccionarios y notas
+outputs/graphs/        Figuras generadas por el código
+outputs/tables/        Tablas generadas por el código
 ```
 
-Si pasa, ejecuta el análisis o los componentes que necesites:
+## Datos
 
-```powershell
-Rscript scripts/01_ingresos_hogares.R
-Rscript scripts/02_sankey_ingresos_gastos.R
-Rscript scripts/06_productos_alimentos_region.R
-```
+Las fuentes de cada artículo están en `documentation/fuentes.csv`, con su
+enlace oficial. Los datos crudos no se versionan: el script de descarga los
+vuelve a obtener. Los datos de terceros conservan los términos de su fuente
+(ver `DATA-NOTICE.md`).
 
-Para renderizar el artículo:
+## Publicación en el sitio
 
-```powershell
-quarto render report/report.qmd
-```
+Copia el contenido de `article/` a `content/post/[categoria]/[slug]/` en el
+repositorio del sitio. Revisa que `authors` coincida con un archivo de
+`content/los-quantificadores/` y que `repository_url` apunte a este
+repositorio.
 
-## Salidas principales
-
-El proyecto escribe resultados en `output/`, por ejemplo:
-
-- `output/figures/distribucion_ingreso_2025.png`
-- `output/figures/gasto_total_por_quintil_ingreso_2025.png`
-- `output/figures/gasolina_promedio_por_quintil_2025.png`
-- `output/figures/gasto_total_mediano_provincia_2025.png`
-- `output/figures/productos_alimentos_mas_presentes_region_2025.png`
-- `output/figures/sankey_ingresos_gastos_interactivo.html`
-- `output/tables/resumen_ingresos_hogares_2025.xlsx`
-- `output/tables/enemdu_2025_ingreso_hogar_summary.xlsx`
-- `output/tables/enighur_ingresos_y_gastos_resumen.xlsx`
-- `output/tables/productos_alimentos_mas_presentes_region_2025.csv`
-
-`report/report.qmd` espera encontrar varias de esas figuras antes de renderizar correctamente.
-
-## Notas operativas
-
-- Ejecuta los scripts desde la raíz del proyecto.
-- `scripts/01_ingresos_hogares.R` desactiva el dispositivo gráfico por defecto con `pdf(NULL)` para evitar generar `Rplots.pdf` durante una corrida normal.
-- Si falta una base de datos o una figura requerida, los scripts y el reporte muestran errores explícitos con las rutas revisadas.
-
+Si un gráfico del artículo se publica también en redes o en Visualizaciones,
+se rehace en `graficos-el-quantificador` a partir de una tabla de
+`data/final/` o `outputs/tables/`, con su propia fila en el catálogo.
 
 ## Licencias y cómo citar
 
@@ -103,4 +84,5 @@ El proyecto escribe resultados en `output/`, por ejemplo:
 Las cifras y resultados pueden citarse libremente. Menciona a los autores y a
 El Quantificador (LIDE) y enlaza la publicación original. Los usos comerciales
 de gráficos, tablas o texto requieren autorización previa:
-elquantificador@laboratoriolide.org. Ver también `CITATION.cff`.
+elquantificador@laboratoriolide.org. Ver también `CITATION.cff` y
+`CONTRIBUTING.md`.
